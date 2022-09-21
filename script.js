@@ -9,13 +9,13 @@ function getComputerChoice() {
 function numberToChoice(num) {
     switch (num) {
         case 1: 
-            return 'rock';
+            return 'Rock';
             break;
         case 2: 
-            return 'paper';
+            return 'Paper';
             break;
         case 3: 
-            return 'scissors';
+            return 'Scissors';
             break;
         default: 
             return 'Invalid input.';
@@ -24,29 +24,53 @@ function numberToChoice(num) {
 
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
+    computerSelection = computerSelection.toLowerCase();
     if (playerSelection === 'rock' && computerSelection !== 'rock') {
-        return computerSelection === 'paper' ? 'You lose! Paper beats rock.' :
-        'You win! Rock beats scissors.';
+        return computerSelection === 'paper' ? 'L' :
+        'W';
     }
     else if (playerSelection === 'paper' && computerSelection !== 'paper') {
-        return computerSelection === 'scissors' ? 'You lose! Scissors beats paper' :
-        'You win! Paper beats rock';
+        return computerSelection === 'scissors' ? 'L' :
+        'W';
     }
     else if (playerSelection === 'scissors' && computerSelection !== 'scissors') {
-        return computerSelection === 'rock' ? 'You lose! Rock beats scissors' : 
-        'You win! Scissors beats paper';
+        return computerSelection === 'rock' ? 'L' : 
+        'W';
     }
-    return 'It\'s a tie!';
+    return 'T';
 }
 
 function game() {
+    let computerWins = 0;
+    let playerWins = 0;
     for (let i = 0; i < 5; i++) {
         let playerChoice = getValidInput();
         if (playerChoice === null) {
             console.log('Cancelled game');
             return null;
         }
-        console.log(playRound(playerChoice, getComputerChoice()));
+        playerChoice = firstLetterUpper(playerChoice);
+        let computerChoice = getComputerChoice();
+        if (playRound(playerChoice, computerChoice) === 'W') {
+            playerWins++;
+            console.log(`You won! ${playerChoice} beats ${computerChoice}`);
+        }
+        else if (playRound(playerChoice, computerChoice) === 'L') {
+            computerWins++;
+            console.log(`You lost! ${playerChoice} loses to ${computerChoice}`);
+        }
+        else {
+            console.log('It\'s a tie!');
+        }
+    }
+    if (playerWins > computerWins) {
+        console.log("Winner winner chicken dinner!");
+    }
+    else if (computerWins > playerWins) {
+        console.log(":-(");
+    }
+    else {
+        console.log("Tie");
     }
 }
 
@@ -62,4 +86,8 @@ function getValidInput() {
         }
     } while(playerChoice !== 'rock' && playerChoice !== 'paper' && playerChoice !== 'scissors');
     return playerChoice;
+}
+
+function firstLetterUpper(str) {
+    return str.substring(0,1).toUpperCase() + str.substring(1);
 }
