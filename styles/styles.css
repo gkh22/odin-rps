@@ -53,6 +53,44 @@ body {
     text-align: start;
 }
 
+.pokefight, .topbox, .action, .bottombox {
+    display: flex;
+}
+
+.pokefight {
+    flex-flow: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.topbox, .bottombox {
+    background-color: #000000;
+    width: 100vw;
+    height: 150px;
+}
+
+.topbox, .bottombox {
+    position: relative;
+}
+
+.topbox {
+    top: -300px;
+}
+
+.bottombox {
+    bottom: -300px;
+}
+
+.action {
+    background-color: #ffffff;
+    width: 100vw;
+    height: 400px;
+}
+
+.transparent {
+    opacity: 0;
+}
+
 
 .choices {
     display: flex;

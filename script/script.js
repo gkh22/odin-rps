@@ -9,13 +9,39 @@ window.addEventListener('load', () => {
     page.classList.toggle('white');
     page.classList.toggle('transition');
 });
-const copyrights = document.querySelector('.copyrights');
-//setTimeout(disappear(copyrights), 3000);
-//disappear(copyrights);
 //gameStart();
 
-function disappear(element) {
-    element.classList.toggle('hidden');
+setTimeout(() => {
+    const copyrights = document.querySelector('.copyrights');
+    copyrights.classList.toggle('hidden');
+}, 3000);
+
+setTimeout(() => {
+    const pokeFight = document.querySelector('.pokefight');
+    const topBox = document.querySelector('.topbox');
+    const bottomBox = document.querySelector('.bottombox');
+    pokeFight.classList.toggle('hidden');
+    setScreen();
+}, 3100);
+
+function setScreen() {
+    const topBox = document.querySelector('.topbox');
+    const bottomBox = document.querySelector('.bottombox');
+    topBox.classList.toggle('transparent');
+    bottomBox.classList.toggle('transparent');
+    let pos = -300;
+    let moveIn = null;
+    moveIn = setInterval(frame, 3);
+    function frame() {
+        if (pos === 0) {
+            clearInterval(moveIn);
+        }
+        else {
+            pos++;
+            topBox.style.top = pos + "px";
+            bottomBox.style.bottom = pos + "px";
+        }
+    }
 }
 
 function getComputerChoice() {
