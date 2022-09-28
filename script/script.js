@@ -20,28 +20,65 @@ setTimeout(() => {
     const pokeFight = document.querySelector('.pokefight');
     const topBox = document.querySelector('.topbox');
     const bottomBox = document.querySelector('.bottombox');
+    const action = document.querySelector('.action');
     pokeFight.classList.toggle('hidden');
-    setScreen();
-}, 3100);
-
-function setScreen() {
-    const topBox = document.querySelector('.topbox');
-    const bottomBox = document.querySelector('.bottombox');
     topBox.classList.toggle('transparent');
     bottomBox.classList.toggle('transparent');
-    let pos = -300;
+    setScreen();
+}, 3000);
+
+setTimeout(() => {
+    const action = document.querySelector('.action');
+    action.classList.toggle('transparent');
+}, 4500);
+
+setTimeout(() => {
+   lightningFlash();
+}, 5500);
+
+setTimeout(godSpeed, 5800);
+
+function setScreen() {
+    const topBox = document.querySelector('.topbox_cover');
+    const bottomBox = document.querySelector('.bottombox_cover');
+    let pos = 0;
     let moveIn = null;
-    moveIn = setInterval(frame, 3);
+    moveIn = setInterval(frame, 9);
     function frame() {
-        if (pos === 0) {
+        if (pos === 25) {
             clearInterval(moveIn);
+            topBox.classList.toggle('hidden');
+            bottomBox.classList.toggle('hidden');
         }
         else {
-            pos++;
-            topBox.style.top = pos + "px";
-            bottomBox.style.bottom = pos + "px";
+            pos += .25;
+            topBox.style.top = pos + "%";
+            bottomBox.style.bottom = pos + "%";
+            console.log('hello');
         }
     }
+}
+
+function lightningFlash() {
+    const lightning = document.querySelector('.lightning');
+    let once = null;
+    let hit = 0;
+    once = setInterval(flash, 300);
+    function flash() {
+        lightning.classList.toggle('transparent');
+        if (hit === 1) {
+            clearInterval(once);
+            lightning.classList.toggle('hidden');
+        }
+        hit++;
+    }
+}
+
+function godSpeed() {
+    const hiatus = document.querySelector('.hiatus');
+    const hxh = document.querySelector('.hxh');
+    hxh.src = './images/hxh.jpg';
+    hiatus.classList.toggle('godSpeed');
 }
 
 function getComputerChoice() {
