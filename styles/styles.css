@@ -75,7 +75,7 @@ body {
 
 .topbox, .bottombox, .topbox_cover, .bottombox_cover {
     width: 100vw;
-    height: 25%;
+    height: 20%;
 }
 
 .topbox_cover {
@@ -93,21 +93,35 @@ body {
 .action {
     background-color: #ffffff;
     width: 100vw;
-    height: 50%;
+    height: 60%;
     justify-content: center;
     align-items: center;
-    flex-flow: column wrap;
+    flex-flow: column;
 }
 
 .lightning {
     width: 500px;
-    height: 700px;
-    position: absolute;
+    height: 100vh;
+    z-index: 1;
 }
 
 .godSpeed {
-    color: #7DF9FF;
+    animation: electric 250ms infinite;
 }
+
+.container {
+    display: flex;
+    gap: 5px;
+    margin: 0;
+    position: absolute;
+    bottom: 25%;
+}
+
+.electricity1, .electricity2, .electricity3 {
+    width: 100px;
+    height: 100px;
+}
+
 
 .hxh {
     width: 150px;
@@ -149,4 +163,25 @@ body {
     font-size: 25px;
 }
 
+@keyframes electric {
+    0% {
+        color: #B3CEFF;
+    }
+
+    25% {
+        color: #86FAF2;
+    }
+
+    50% {
+        color: #00A6D7;
+    }
+
+    75% {
+        color: #86FAF2;
+    }
+
+    100% {
+        color: #B3CEFF;
+    }
+}
 

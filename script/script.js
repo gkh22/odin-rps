@@ -33,10 +33,13 @@ setTimeout(() => {
 }, 4500);
 
 setTimeout(() => {
-   lightningFlash();
+    lightningFlash();
 }, 5500);
 
 setTimeout(godSpeed, 5800);
+
+setTimeout(electricity, 6500);
+setTimeout(clearLogo, 10000);
 
 function setScreen() {
     const topBox = document.querySelector('.topbox_cover');
@@ -45,7 +48,7 @@ function setScreen() {
     let moveIn = null;
     moveIn = setInterval(frame, 9);
     function frame() {
-        if (pos === 25) {
+        if (pos === 20) {
             clearInterval(moveIn);
             topBox.classList.toggle('hidden');
             bottomBox.classList.toggle('hidden');
@@ -81,22 +84,63 @@ function godSpeed() {
     hiatus.classList.toggle('godSpeed');
 }
 
+function electricity() {
+    const container = document.querySelector('.container');
+    container.classList.toggle('hidden');
+    const electricity1 = document.querySelector('.electricity1');
+    const electricity2 = document.querySelector('.electricity2');
+    const electricity3 = document.querySelector('.electricity3');
+    let time = 0;
+    let sequence = null;
+    sequence = setInterval(flash, 800);
+    function flash() {
+        if (time === 0) {
+            electricity1.classList.toggle('transparent');
+            time += 300;
+        }
+        else if (time === 300) {
+            electricity1.classList.toggle('transparent');
+            electricity3.classList.toggle('transparent');
+            time += 300;
+        }
+        else if (time === 600) {
+            electricity3.classList.toggle('transparent');
+            electricity2.classList.toggle('transparent');
+            electricity3.style.position = 'relative';
+            electricity3.style.top = '10%';
+            time += 300;
+        }
+        else {
+            electricity3.classList.toggle('transparent');
+            container.classList.toggle('hidden');
+            clearInterval(sequence);
+        }
+    }
+}
+
+function clearLogo() {
+    const hxh = document.querySelector('.hxh');
+    const hiatus = document.querySelector('.hiatus');
+    hxh.classList.toggle('hidden');
+    hiatus.classList.toggle('hidden');
+}
+
 function getComputerChoice() {
     return numberToChoice(Math.floor(Math.random() * 3) + 1);
 }
 
 function numberToChoice(num) {
     switch (num) {
-        case 1: 
+        case 1:
             return 'rock';
             break;
-        case 2: 
+        case 2:
             return 'paper';
             break;
-        case 3: 
+        case 3:
             return 'scissors';
             break;
-        default: 
+        default:
             return 'Invalid input.';
     }
 }
@@ -188,7 +232,7 @@ function keepScore(playerWins, computerWins) {
 }
 
 function re() {
-    const result = document.querySelector('.result');   
+    const result = document.querySelector('.result');
     const replay = document.querySelector('.replay');
     if (gameStatus === 'W') {
         result.textContent = 'You WON!';
