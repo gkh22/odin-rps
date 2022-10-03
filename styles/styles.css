@@ -99,6 +99,14 @@ body {
     flex-flow: column;
 }
 
+.hxhlogo {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    flex-shrink: 0;
+    text-align: center;
+}
+
 .lightning {
     width: 500px;
     height: 100vh;
@@ -126,6 +134,23 @@ body {
 .hxh {
     width: 150px;
     height: auto;
+}
+
+.jiggly {
+    display: flex;
+    width: 100vw; 
+}
+
+.walking {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    left: 0%;
+}
+
+.sing {
+    width: 250px;
+    height: 250px;
 }
 
 .transparent {
@@ -162,6 +187,16 @@ body {
 .text {
     font-size: 25px;
 }
+
+.hidden {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
 
 @keyframes electric {
     0% {

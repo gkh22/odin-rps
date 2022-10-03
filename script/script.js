@@ -4,6 +4,9 @@ let playerWins = 0;
 let computerWins = 0;
 let gameStatus = 'N/A';
 
+
+const lake = new Audio('./audio/Lake.mp3');
+
 window.addEventListener('load', () => {
     const page = document.querySelector('body');
     page.classList.toggle('white');
@@ -40,6 +43,8 @@ setTimeout(godSpeed, 5800);
 
 setTimeout(electricity, 6500);
 setTimeout(clearLogo, 10000);
+
+setTimeout(playJiggly, 12000);
 
 function setScreen() {
     const topBox = document.querySelector('.topbox_cover');
@@ -119,10 +124,59 @@ function electricity() {
 }
 
 function clearLogo() {
+    const logo = document.querySelector('.hxhlogo');
     const hxh = document.querySelector('.hxh');
     const hiatus = document.querySelector('.hiatus');
     hxh.classList.toggle('hidden');
     hiatus.classList.toggle('hidden');
+    logo.classList.toggle('hidden');
+}   
+
+function jiggly() {
+    const jiggly = document.querySelector('.jiggly');
+    const walking = document.querySelector('.walking');
+    jiggly.classList.toggle('hidden');
+    let pos = 0;
+    let finalWalk = null;
+    let walk2 = null;
+    let walk = null;
+    walk = setInterval(move, 1500);
+    function move() {
+        if (pos === 40) {
+            clearInterval(walk);
+            console.log(pos);
+            finalWalk = setInterval(() => {
+                pos++;
+                walking.style.left = pos + '%';
+                if (pos === 43) {
+                    clearInterval(finalWalk);
+                    walking.style.position = 'static';
+                    jiggly.style.justifyContent = 'center';
+                    jiggly.style.alignItems = 'center';
+                }
+            }, 200);
+        }
+        else {
+            walk2 = setInterval(move2, 20);
+            function move2() {
+                pos++;
+                walking.style.left = pos + '%';
+                if (pos % 10 === 0) {
+                    clearInterval(walk2);
+                }
+            }
+        }
+    }
+}
+
+function playJiggly() {
+    const lakeStart = document.querySelector('.startlake');
+    lakeStart.classList.toggle('hidden');
+    lakeStart.addEventListener('click', () => {
+        jiggly();
+        lake.play();
+        lakeStart.classList.toggle('hidden');
+    })
 }
 
 function getComputerChoice() {
