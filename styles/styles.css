@@ -9,10 +9,40 @@ body {
     background-color: black;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
+}
+
+.dirty-white {
+    color: #E8E4C9;
+}
+
+.start-screen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.begin {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start {
+    color: white;
+    background-color: black;
+    border: none;
+    animation: blink 500ms infinite;
 }
 
 .transition {
     transition-duration: 3s;
+}
+
+.quick-transition {
+    transition-duration: .25s;
 }
 
 .white {
@@ -148,9 +178,79 @@ body {
     left: 0%;
 }
 
-.sing {
-    width: 250px;
-    height: 250px;
+.loading-screen {
+    display: flex;
+    overflow: hidden;
+    flex-flow: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-flow: column;
+    width: 100vw;
+    height: 40%;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.logo-rps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.moveDown {
+   top: -50%;
+   position: relative;
+   flex-shrink: 0;
+   margin: 0;
+}
+
+.version-container {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.version {
+    right: -20%;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.poke {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 50%;
+}
+
+.placeholder {
+    width: 200px;
+    height: auto;
+
+    bottom: -30%;
+    position: relative;
+}
+
+.trainer_pic {
+    width: 150px;
+    height: auto;
+
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
 }
 
 .transparent {
@@ -220,3 +320,12 @@ body {
     }
 }
 
+@keyframes blink {
+    0% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0%;
+    } 
+}

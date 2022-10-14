@@ -6,45 +6,52 @@ let gameStatus = 'N/A';
 
 
 const lake = new Audio('./audio/Lake.mp3');
+const lightning_effect = new Audio('./audio/lightning.mp3');
+const electricity_effect = new Audio('./audio/electricity.mp3');
+
+const begin = document.querySelector('.start-screen');
+const start = document.querySelector('.start');
 
 window.addEventListener('load', () => {
+    begin.classList.toggle('hidden');
+});
+
+start.addEventListener('click', loadingscreen);
+
+function loadingscreen() {  
+    begin.classList.toggle('hidden');
     const page = document.querySelector('body');
     page.classList.toggle('white');
     page.classList.toggle('transition');
-});
-//gameStart();
-
-setTimeout(() => {
     const copyrights = document.querySelector('.copyrights');
     copyrights.classList.toggle('hidden');
-}, 3000);
+    setTimeout(() => {
+        copyrights.classList.toggle('hidden');
+        const pokeFight = document.querySelector('.pokefight');
+        const topBox = document.querySelector('.topbox');
+        const bottomBox = document.querySelector('.bottombox');
+        const action = document.querySelector('.action');
+        pokeFight.classList.toggle('hidden');
+        topBox.classList.toggle('transparent');
+        bottomBox.classList.toggle('transparent');
+        setScreen();
+    }, 3000);
 
-setTimeout(() => {
-    const pokeFight = document.querySelector('.pokefight');
-    const topBox = document.querySelector('.topbox');
-    const bottomBox = document.querySelector('.bottombox');
-    const action = document.querySelector('.action');
-    pokeFight.classList.toggle('hidden');
-    topBox.classList.toggle('transparent');
-    bottomBox.classList.toggle('transparent');
-    setScreen();
-}, 3000);
+    setTimeout(() => {
+        const action = document.querySelector('.action');
+        action.classList.toggle('transparent');
+    }, 4500);
 
-setTimeout(() => {
-    const action = document.querySelector('.action');
-    action.classList.toggle('transparent');
-}, 4500);
+    setTimeout(lightningFlash, 5500);
+    setTimeout(godSpeed, 5800);
+    setTimeout(electricity, 6500);
 
-setTimeout(() => {
-    lightningFlash();
-}, 5500);
+    setTimeout(clearLogo, 10000);
 
-setTimeout(godSpeed, 5800);
-
-setTimeout(electricity, 6500);
-setTimeout(clearLogo, 10000);
-
-setTimeout(playJiggly, 12000);
+    setTimeout(playJiggly, 12000);
+    setTimeout(clearScreen, 29000);
+    setTimeout(setScreen2, 31000);
+}
 
 function setScreen() {
     const topBox = document.querySelector('.topbox_cover');
@@ -71,6 +78,8 @@ function lightningFlash() {
     const lightning = document.querySelector('.lightning');
     let once = null;
     let hit = 0;
+    lightning_effect.play();
+    electricity_effect.play();
     once = setInterval(flash, 300);
     function flash() {
         lightning.classList.toggle('transparent');
@@ -124,6 +133,7 @@ function electricity() {
 }
 
 function clearLogo() {
+    electricity_effect.pause();
     const logo = document.querySelector('.hxhlogo');
     const hxh = document.querySelector('.hxh');
     const hiatus = document.querySelector('.hiatus');
@@ -170,13 +180,68 @@ function jiggly() {
 }
 
 function playJiggly() {
-    const lakeStart = document.querySelector('.startlake');
-    lakeStart.classList.toggle('hidden');
-    lakeStart.addEventListener('click', () => {
-        jiggly();
-        lake.play();
-        lakeStart.classList.toggle('hidden');
-    })
+    jiggly();
+    lake.play();
+}
+
+function clearScreen() {
+    const jiggly = document.querySelector('.jiggly');
+    const topbox = document.querySelector('.topbox');
+    const bottombox = document.querySelector('.bottombox');
+    const pokefight = document.querySelector('.pokefight');
+    jiggly.classList.toggle('quick-transition');
+    topbox.classList.toggle('quick-transition');
+    bottombox.classList.toggle('quick-transition');
+    jiggly.classList.toggle('transparent');
+    topbox.classList.toggle('transparent');
+    bottombox.classList.toggle('transparent');
+    setTimeout(() => {
+        pokefight.classList.toggle('hidden');
+        jiggly.classList.toggle('hidden');
+        topbox.classList.toggle('hidden');
+        bottombox.classList.toggle('hidden');
+    }, 2000);
+}
+
+function setScreen2() {
+    const loadingscreen = document.querySelector('.loading-screen');
+    const logo = document.querySelector('.moveDown');
+    const footer = document.querySelector('.footer');
+    loadingscreen.classList.toggle('hidden');
+    footer.classList.toggle('hidden');
+    let pos = -50;
+    let func = null;
+    func = setInterval(() => {
+        pos += 0.25;
+        if (pos === 0) {
+            clearInterval(func);
+            logo.style.position = 'static';
+        }
+        else {
+            logo.style.top = pos + "%";
+        }
+        console.log('hi');
+    }, 3);
+    setTimeout(versionSlide, 1500);
+}
+
+function versionSlide() {
+    const version = document.querySelector('.version');
+    version.classList.toggle('hidden');
+    let func = null;
+    let pos = -50;
+    func = setInterval(() => {
+        pos += 0.25;
+        if (pos === 0) {
+            clearInterval(func);
+            version.style.position = 'static';
+            version.style.right = 'inherit';
+        }
+        else {
+            version.style.right = pos + '%';
+        }
+        console.log('hello');
+    }, 3);
 }
 
 function getComputerChoice() {
